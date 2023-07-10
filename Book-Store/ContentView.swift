@@ -52,7 +52,7 @@ struct BookRowView: View {
 
 struct BookRowView_Previews: PreviewProvider {
     static var previews: some View {
-        BookRowView(book: Book(title: "Book Title", publicationDate: "2023-01-01", bookImageURL: URL(string: "https://example.com/image.jpg")!))
+        BookRowView(book: Book(title: "Book Title", publicationDate: "2023-01-01", bookImageURL: URL(string: "")!))
             .previewLayout(.fixed(width: 300, height: 100))
             .padding()
     }
