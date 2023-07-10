@@ -7,17 +7,12 @@
 
 import Foundation
 
-struct Book: Codable {
+struct Book: Codable, Identifiable {
+    let id = UUID()
     let title: String
-    let publicationDate: String
-    let bookImageURL: URL
-    
-    enum CodingKeys: String, CodingKey {
-        case title
-        case publicationDate = "publish_date"
-        case bookImageURL = "book_image"
-    }
-}
-struct Response: Codable {
-    let results: [Book]
+    let description: String
+    let author: String
+    let publisher: String
+    let bookImageURL: String
+    let rank: Int
 }
