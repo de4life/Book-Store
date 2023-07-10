@@ -1,20 +1,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var viewModel = BookViewModel()
+    let categories = [
+        Category(name: "Combined Print and E-Book Fiction"),
+        Category(name: "Hardcover Fiction")
+       
+    ]
     
     var body: some View {
         NavigationView {
-            List(viewModel.books, id: \.title) { book in
-                NavigationLink(destination: BookDetailView(book: book)) {
-                    BookRowView(book: book)
+            List(categories) { category in
+                NavigationLink(destination: BookListView(category: category)) {
+                    CategoryRow(category: category)
                 }
             }
-            .listStyle(GroupedListStyle())
-            .navigationBarTitle("Bookstore")
-            .onAppear {
-                viewModel.fetchBooks()
-            }
+            .navigationTitle("Categories")
         }
     }
 }
@@ -25,35 +25,17 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct BookRowView: View {
-    let book: Book
-    
-    var body: some View {
-        HStack {
-            AsyncImage(url: book.bookImageURL) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 80, height: 120)
-            } placeholder: {
-                Color.gray
-                    .frame(width: 80, height: 120)
-            }
-            
-            VStack(alignment: .leading) {
-                Text(book.title)
-                    .font(.headline)
-                Text(book.publicationDate)
-                    .font(.subheadline)
-            }
-        }
-    }
+struct Category: Identifiable {
+    let id = UUID()
+    let name: String
 }
 
-struct BookRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        BookRowView(book: Book(title: "Book Title", publicationDate: "2023-01-01", bookImageURL: URL(string: "")!))
-            .previewLayout(.fixed(width: 300, height: 100))
+struct CategoryRow: View {
+    let category: Category
+    
+    var body: some View {
+        Text(category.name)
+            .font(.title2)
             .padding()
     }
 }
