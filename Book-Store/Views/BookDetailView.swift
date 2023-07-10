@@ -34,6 +34,6 @@ image
 
 struct BookDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BookDetailView(book: Book(title: "Book Title", publicationDate: "2023-01-01", bookImageURL: URL(string: "https://example.com/image.jpg")!))
+        BookDetailView(book: Book(title: "Book Title", publicationDate: "2023-01-01", bookImageURL: URL(string: "")!))
     }
 }
